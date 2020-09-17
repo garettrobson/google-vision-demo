@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('images', App\Http\Controllers\ImageController::class)->only([
+    'index', 'show', 'create', 'store', 'destroy'
+]);
+
+Route::redirect('/', route('images.index'));

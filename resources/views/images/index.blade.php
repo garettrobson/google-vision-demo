@@ -28,7 +28,13 @@
                     </td>
                     <td>{{ $image->file_name }}</td>
                     <td>{{ $image->mime_type }}</td>
-                    <td></td>
+                    <td>
+                        <ul>
+                        @foreach($image->labelsSorted as $label)
+                            <li>{{ $label->label }}</li>
+                        @endforeach
+                        </ul>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

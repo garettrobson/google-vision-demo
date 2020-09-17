@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('images', App\Http\Controllers\ImageController::class)->only([
-    'index', 'show', 'create', 'store', 'destroy'
+    'index', 'create', 'store', 'destroy'
 ]);
 
 Route::redirect('/', route('images.index'));

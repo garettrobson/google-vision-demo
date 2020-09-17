@@ -15,4 +15,12 @@ class Image extends Model
         'thumbnail',
     ];
 
+    public function labels() {
+        return $this->belongsToMany('App\Models\Label');
+    }
+
+    public function labelsSorted() {
+        return $this->labels()->orderBy('label');
+    }
+
 }

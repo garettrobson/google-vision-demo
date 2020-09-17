@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Observers\GoogleTagImageObserver;
+use App\Models\Image;
+
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Image::observe(GoogleTagImageObserver::class);
     }
 }

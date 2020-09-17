@@ -21,6 +21,19 @@ class CreateTables extends Migration
             $table->string('file_name')->notNull();
             $table->string('mime_type')->notNull();
         });
+
+        Schema::create('labels', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->string('label');
+        });
+
+        Schema::create('image_label', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('label_id');
+        });
     }
 
     /**
@@ -30,6 +43,8 @@ class CreateTables extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('image_labels');
+        Schema::dropIfExists('labels');
         Schema::dropIfExists('images');
     }
 }

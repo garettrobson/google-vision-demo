@@ -9,7 +9,6 @@ use Storage;
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 
-
 class GoogleTagImageObserver
 {
     /**
@@ -38,5 +37,4 @@ class GoogleTagImageObserver
             );
         }
     }
-
 }

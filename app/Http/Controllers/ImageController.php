@@ -68,7 +68,6 @@ class ImageController extends Controller
 
         // Success redirect with message
         return redirect()->route('images.index')->with('status', 'Image uploaded successfully');
-
     }
 
     /**

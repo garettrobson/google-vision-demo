@@ -5,7 +5,10 @@ namespace App\Observers;
 use App\Models\Image;
 use App\Models\Label;
 
+use Storage;
+
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
+
 
 class GoogleTagImageObserver
 {
@@ -18,7 +21,7 @@ class GoogleTagImageObserver
     public function created(Image $image)
     {
         // Get image data
-        $data = \Storage::disk('local')->get($image->path);
+        $data = Storage::disk('local')->get($image->path);
 
         // Request labels for image
         $imageAnnotator = new ImageAnnotatorClient();

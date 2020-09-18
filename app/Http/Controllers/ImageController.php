@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+
 use Illuminate\Http\Request;
+
+use Imagick;
+use Storage;
 
 class ImageController extends Controller
 {
@@ -49,10 +53,10 @@ class ImageController extends Controller
         $fname = basename($path);
 
         // Save thumbnail using same file name
-        $thumbnail = new \Imagick($image->path());
+        $thumbnail = new Imagick($image->path());
         $thumbnail->thumbnailImage(128, 0);
         $thumbnailPath = 'uploads/images/thumbnails/'.$fname;
-        \Storage::disk('local')->put($thumbnailPath, $thumbnail->getImagesBlob());
+        Storage::disk('local')->put($thumbnailPath, $thumbnail->getImagesBlob());
 
         // Create the image
         Image::create([

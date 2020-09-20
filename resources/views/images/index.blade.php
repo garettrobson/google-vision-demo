@@ -16,6 +16,7 @@
                 <th>File Name</th>
                 <th>Mime Type</th>
                 <th>Labels</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,14 @@
                             <li>{{ $label->label }}</li>
                         @endforeach
                         </ul>
+                    </td>
+                    <td>
+                        <form action="{{ route('images.destroy', ['image' => $image ]) }}" method="POST">
+                            @method('DELETE')
+                            @csrf()
+                            <input type="hidden" value="{{ $image->id }}">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

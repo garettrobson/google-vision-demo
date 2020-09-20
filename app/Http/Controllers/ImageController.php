@@ -71,17 +71,6 @@ class ImageController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Image $image)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Image  $image
@@ -89,6 +78,7 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        //
+        $image->delete();
+        return redirect()->route('images.index')->with('status', 'Image deleted successfully');
     }
 }

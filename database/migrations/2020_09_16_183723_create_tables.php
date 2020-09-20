@@ -20,6 +20,7 @@ class CreateTables extends Migration
             $table->mediumText('thumbnail')->notNull();
             $table->string('file_name')->notNull();
             $table->string('mime_type')->notNull();
+            $table->tinyInteger('is_local')->default(1)->notNull();
         });
 
         Schema::create('labels', function (Blueprint $table) {

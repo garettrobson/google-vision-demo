@@ -12,6 +12,11 @@ class Image extends Model
         'file_name',
         'mime_type',
         'thumbnail',
+        'is_local',
+    ];
+
+    protected $attributes = [
+        'is_local' => 1,
     ];
 
     public function labels()

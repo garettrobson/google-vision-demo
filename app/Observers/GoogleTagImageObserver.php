@@ -20,7 +20,9 @@ class GoogleTagImageObserver
     public function created(Image $image)
     {
         // Get image data
-        $data = Storage::disk('local')->get($image->path);
+        $data = $image->is_local === 1 ?
+            Storage::disk('local')->get($image->path):
+            $image->path;
 
         // Request labels for image
         $imageAnnotator = new ImageAnnotatorClient();

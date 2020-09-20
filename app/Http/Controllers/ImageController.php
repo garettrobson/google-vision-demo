@@ -81,4 +81,54 @@ class ImageController extends Controller
         $image->delete();
         return redirect()->route('images.index')->with('status', 'Image deleted successfully');
     }
+
+    /**
+     * Show the form for creating a new resource from a url.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createWeb()
+    {
+        return view('images.web');
+    }
+
+    /**
+     * Store a newly created web resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeRemote(Request $request)
+    {
+        $data = $request->validate([
+            'url' => 'required|url',
+        ]);
+
+        // Use the url as a path
+        $path = $data['url'];
+        $url = parse_url($path);
+        $fname = isset($url['path']) ?
+            basename($url['path']) :
+            '[Unknown]';
+
+        // Save thumbnail using same file name
+        $thumbnail = new Imagick($path);
+        $thumbnail->thumbnailImage(128, 0);
+        $extenstion = '.' . \mb_strtolower($thumbnail->getImageFormat());
+        $thumbnailPath = 'uploads/images/thumbnails/'.sha1($path).$extenstion;
+        Storage::disk('local')->put($thumbnailPath, $thumbnail->getImagesBlob());
+
+        // Create the image
+        Image::create([
+            'path' => $path,
+            'file_name' => $fname,
+            'mime_type' => $thumbnail->getImageMimeType(),
+            'thumbnail' => $thumbnailPath,
+            'is_local' => 0,
+        ]);
+
+        // Success redirect with message
+        return redirect()->route('images.index')->with('status', 'Remote image stored successfully');
+
+    }
 }

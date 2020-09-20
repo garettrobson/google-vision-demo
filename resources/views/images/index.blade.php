@@ -3,7 +3,9 @@
 @section('title', 'Images')
 
 @section('content')
-    <a href="{{ route('images.create') }}" class="btn btn-primary">Add Image</a>
+    Files
+    <a href="{{ route('images.create') }}" class="btn btn-primary">Add Image From File</a>
+    <a href="{{ route('images.create.web') }}" class="btn btn-primary">Add Image From Url</a>
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}

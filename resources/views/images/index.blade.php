@@ -24,7 +24,7 @@
                 <tr>
                     <td>
                         <a href="{{ $image->path }}">
-                            <img src="{{ $image->thumbnail }}" />
+                            <img src="{{ $image->is_local ? '/' : '' }}{{ $image->thumbnail }}" />
                         </a>
                     </td>
                     <td>{{ $image->file_name }}</td>

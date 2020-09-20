@@ -68,7 +68,7 @@ class ImageController extends Controller
             'path' => $path,
             'file_name' => $image->getClientOriginalName(),
             'mime_type' => \mime_content_type($image->path()),
-            'thumbnail' => '\\'.$thumbnailPath,
+            'thumbnail' => $thumbnailPath,
         ]);
 
         // Success redirect with message
@@ -128,7 +128,7 @@ class ImageController extends Controller
             'path' => $path,
             'file_name' => $fname,
             'mime_type' => $thumbnail->getImageMimeType(),
-            'thumbnail' => '\\'.$thumbnailPath,
+            'thumbnail' => $thumbnailPath,
             'is_local' => 0,
         ]);
 

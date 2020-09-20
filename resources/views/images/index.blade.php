@@ -1,14 +1,9 @@
-@extends('layouts.base')
+@extends('images.base')
 
-@section('title', 'Images')
+@section('title', 'View Images')
 
 @section('content')
-    Actions
-    @if($filter)
-        <a href="{{ route('images.index') }}" class="btn btn-success">View All</a>
-    @endif
-    <a href="{{ route('images.create') }}" class="btn btn-primary">Add Image From File</a>
-    <a href="{{ route('images.create.web') }}" class="btn btn-primary">Add Image From Url</a>
+    @parent
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}

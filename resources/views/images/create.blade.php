@@ -1,15 +1,15 @@
-@extends('layouts.base')
+@extends('images.base')
 
-@section('title', 'Images')
+@section('title', 'Upload Images')
 
 @section('content')
-    <a href="{{ route('images.index') }}" class="btn btn-primary">List Images</a>
+    @parent
     @if ($errors->any())
-    @foreach ($errors->all() as $error)
-        <div class="alert alert-warning" role="alert">
-            {{ $error }}
-        </div>
-    @endforeach
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-warning" role="alert">
+                {{ $error }}
+            </div>
+        @endforeach
     @endif
     <form method="POST" action="{{ route('images.store') }}" enctype="multipart/form-data">
         @csrf

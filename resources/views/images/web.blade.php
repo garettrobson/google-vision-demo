@@ -1,9 +1,9 @@
-@extends('layouts.base')
+@extends('images.base')
 
-@section('title', 'Images')
+@section('title', 'Web Image')
 
 @section('content')
-    <a href="{{ route('images.store.web') }}" class="btn btn-primary">List Images</a>
+    @parent
     @if ($errors->any())
     @foreach ($errors->all() as $error)
         <div class="alert alert-warning" role="alert">

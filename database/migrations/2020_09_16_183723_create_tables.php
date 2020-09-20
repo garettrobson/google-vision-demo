@@ -44,7 +44,7 @@ class CreateTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('image_labels');
+        Schema::dropIfExists('image_label');
         Schema::dropIfExists('labels');
         Schema::dropIfExists('images');
     }

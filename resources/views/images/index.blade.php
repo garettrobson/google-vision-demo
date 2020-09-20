@@ -3,7 +3,10 @@
 @section('title', 'Images')
 
 @section('content')
-    Files
+    Actions
+    @if($filter)
+        <a href="{{ route('images.index') }}" class="btn btn-success">View All</a>
+    @endif
     <a href="{{ route('images.create') }}" class="btn btn-primary">Add Image From File</a>
     <a href="{{ route('images.create.web') }}" class="btn btn-primary">Add Image From Url</a>
     @if (session('status'))
@@ -32,11 +35,11 @@
                     <td>{{ $image->file_name }}</td>
                     <td>{{ $image->mime_type }}</td>
                     <td>
-                        <ul>
                         @foreach($image->labelsSorted as $label)
-                            <li>{{ $label->label }}</li>
+                            <a href="{{ route('images.index.filter', ['filter' => $label]) }}" class="badge badge-{{ $filter && ($filter->id === $label->id) ? 'primary' : 'secondary' }}">
+                                {{ $label->label }}
+                            </a>
                         @endforeach
-                        </ul>
                     </td>
                     <td>
                         <form action="{{ route('images.destroy', ['image' => $image ]) }}" method="POST">

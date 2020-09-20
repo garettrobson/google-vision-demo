@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Models\Label;
 
 use Illuminate\Http\Request;
 
@@ -16,12 +17,16 @@ class ImageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Label $filter = null)
     {
-        $images = Image::orderBy('created_at', 'desc')->paginate(10);
+
+        $images = $filter ?
+            $filter->images()->orderBy('created_at', 'desc'):
+            Image::orderBy('created_at', 'desc');
 
         return view('images.index', [
-            'images' => $images,
+            'images' => $images->paginate(10),
+            'filter' => $filter,
         ]);
     }
 
@@ -63,7 +68,7 @@ class ImageController extends Controller
             'path' => $path,
             'file_name' => $image->getClientOriginalName(),
             'mime_type' => \mime_content_type($image->path()),
-            'thumbnail' => $thumbnailPath,
+            'thumbnail' => '\\'.$thumbnailPath,
         ]);
 
         // Success redirect with message
@@ -123,7 +128,7 @@ class ImageController extends Controller
             'path' => $path,
             'file_name' => $fname,
             'mime_type' => $thumbnail->getImageMimeType(),
-            'thumbnail' => $thumbnailPath,
+            'thumbnail' => '\\'.$thumbnailPath,
             'is_local' => 0,
         ]);
 

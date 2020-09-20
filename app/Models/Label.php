@@ -22,4 +22,8 @@ class Label extends Model
         }
         return $existing;
     }
+
+    public function images() {
+        return $this->belongsToMany('App\Models\Image');
+    }
 }

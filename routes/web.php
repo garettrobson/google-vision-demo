@@ -17,6 +17,8 @@ Route::resource('images', App\Http\Controllers\ImageController::class)->only([
     'index', 'create', 'store', 'destroy'
 ]);
 
+Route::get('images/filter/{filter}', [App\Http\Controllers\ImageController::class, 'index'])->name('images.index.filter');
+
 Route::get('images/web', [App\Http\Controllers\ImageController::class, 'createWeb'])->name('images.create.web');
 Route::post('images/web', [App\Http\Controllers\ImageController::class, 'storeRemote'])->name('images.store.web');
 

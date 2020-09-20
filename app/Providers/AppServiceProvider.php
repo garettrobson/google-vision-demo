@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Observers\ThumbnailImageObserver;
 use App\Observers\GoogleTagImageObserver;
 use App\Models\Image;
 
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Image::observe(ThumbnailImageObserver::class);
         Image::observe(GoogleTagImageObserver::class);
     }
 }

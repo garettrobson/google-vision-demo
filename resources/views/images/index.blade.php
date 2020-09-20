@@ -14,7 +14,6 @@
             <tr>
                 <th>Image</th>
                 <th>File Name</th>
-                <th>Mime Type</th>
                 <th>Labels</th>
                 <th>Actions</th>
             </tr>
@@ -28,7 +27,6 @@
                         </a>
                     </td>
                     <td>{{ $image->file_name }}</td>
-                    <td>{{ $image->mime_type }}</td>
                     <td>
                         @foreach($image->labelsSorted as $label)
                             <a href="{{ route('images.index.filter', ['filter' => $label]) }}" class="badge badge-{{ $filter && ($filter->id === $label->id) ? 'primary' : 'secondary' }}">

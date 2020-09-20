@@ -7,7 +7,6 @@ use App\Models\Label;
 
 use Illuminate\Http\Request;
 
-use Imagick;
 use Storage;
 
 class ImageController extends Controller
@@ -55,20 +54,11 @@ class ImageController extends Controller
         // Save uploaded image & get file name
         $image = $request->file('image-upload');
         $path = $image->store('uploads/images/files');
-        $fname = basename($path);
-
-        // Save thumbnail using same file name
-        $thumbnail = new Imagick($image->path());
-        $thumbnail->thumbnailImage(128, 0);
-        $thumbnailPath = 'uploads/images/thumbnails/'.$fname;
-        Storage::disk('local')->put($thumbnailPath, $thumbnail->getImagesBlob());
 
         // Create the image
         Image::create([
             'path' => $path,
             'file_name' => $image->getClientOriginalName(),
-            'mime_type' => \mime_content_type($image->path()),
-            'thumbnail' => $thumbnailPath,
         ]);
 
         // Success redirect with message
@@ -116,19 +106,10 @@ class ImageController extends Controller
             basename($url['path']) :
             '[Unknown]';
 
-        // Save thumbnail using same file name
-        $thumbnail = new Imagick($path);
-        $thumbnail->thumbnailImage(128, 0);
-        $extenstion = '.' . \mb_strtolower($thumbnail->getImageFormat());
-        $thumbnailPath = 'uploads/images/thumbnails/'.sha1($path).$extenstion;
-        Storage::disk('local')->put($thumbnailPath, $thumbnail->getImagesBlob());
-
         // Create the image
         Image::create([
             'path' => $path,
             'file_name' => $fname,
-            'mime_type' => $thumbnail->getImageMimeType(),
-            'thumbnail' => $thumbnailPath,
             'is_local' => 0,
         ]);
 

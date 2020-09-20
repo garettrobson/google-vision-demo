@@ -17,9 +17,8 @@ class CreateTables extends Migration
             $table->id();
             $table->timestamps();
             $table->mediumText('path')->notNull();
-            $table->mediumText('thumbnail')->notNull();
+            $table->mediumText('thumbnail')->nullable();
             $table->string('file_name')->notNull();
-            $table->string('mime_type')->notNull();
             $table->tinyInteger('is_local')->default(1)->notNull();
         });
 

@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use App\Observers\ThumbnailImageObserver;
-use App\Observers\GoogleTagImageObserver;
+use App\Observers\ImageObserver;
+use App\Observers\ImageThumbnailObserver;
+use App\Observers\ImageGoogleVisionObserver;
 use App\Models\Image;
 
 use Illuminate\Support\ServiceProvider;
@@ -27,7 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Image::observe(ThumbnailImageObserver::class);
-        Image::observe(GoogleTagImageObserver::class);
+        Image::observe(ImageObserver::class);
+        Image::observe(ImageThumbnailObserver::class);
+        Image::observe(ImageGoogleVisionObserver::class);
     }
 }

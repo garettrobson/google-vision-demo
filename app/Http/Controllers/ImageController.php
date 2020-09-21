@@ -18,7 +18,6 @@ class ImageController extends Controller
      */
     public function index(Label $filter = null)
     {
-
         $images = $filter ?
             $filter->images()->orderBy('created_at', 'desc'):
             Image::orderBy('created_at', 'desc');
@@ -115,6 +114,5 @@ class ImageController extends Controller
 
         // Success redirect with message
         return redirect()->route('images.index')->with('status', 'Remote image stored successfully');
-
     }
 }

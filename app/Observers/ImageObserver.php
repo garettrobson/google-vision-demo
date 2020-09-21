@@ -16,7 +16,7 @@ class ImageObserver
      */
     public function deleting(Image $image)
     {
-        if($image->is_local && !Storage::delete($image->path)) {
+        if ($image->is_local && !Storage::delete($image->path)) {
             session()->push('messages.danger', 'Failed to delete local image');
             return false;
         }

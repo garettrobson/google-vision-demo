@@ -7,6 +7,7 @@ use App\Models\Label;
 
 use Storage;
 use Exception;
+use Error;
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 
@@ -42,7 +43,7 @@ class ImageGoogleVisionObserver
             }
         } catch(Exception $ex) {
             session()->push('messages.danger', 'Error occurred during google vision operation');
-        } catch(\Error $ex) {
+        } catch(Error $ex) {
             session()->push('messages.danger', 'Error occurred during google vision operation');
         }
     }

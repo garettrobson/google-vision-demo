@@ -18,7 +18,6 @@ class ImageThumbnailObserver
      */
     public function creating(Image $image)
     {
-
         try {
             $thumbnail = new Imagick($image->path);
             $thumbnail->thumbnailImage(192, 0);
@@ -27,7 +26,7 @@ class ImageThumbnailObserver
             Storage::disk('local')->put($thumbnailPath, $thumbnail->getImagesBlob());
 
             $image->thumbnail = $thumbnailPath;
-        } catch(Exception $ex) {
+        } catch (Exception $ex) {
             session()->push('messages.danger', 'Error encountered during thumbnail process');
             return false;
         }
@@ -41,7 +40,7 @@ class ImageThumbnailObserver
      */
     public function deleting(Image $image)
     {
-        if(!Storage::disk('local')->delete($image->thumbnail)) {
+        if (!Storage::disk('local')->delete($image->thumbnail)) {
             session()->push('messages.danger', 'Failed to delete thumbnail image');
             return false;
         }

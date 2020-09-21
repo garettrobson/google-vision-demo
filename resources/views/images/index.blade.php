@@ -22,9 +22,11 @@
             @foreach($images as $image)
                 <tr>
                     <td>
-                        <a href="{{ $image->path }}">
-                            <img src="{{ $image->is_local ? '/' : '' }}{{ $image->thumbnail }}" />
-                        </a>
+                        @if($image->thumbnail)
+                            <a href="{{ $image->path }}">
+                                <img src="/{{ $image->thumbnail }}" />
+                            </a>
+                        @endif
                     </td>
                     <td>{{ $image->file_name }}</td>
                     <td>
